@@ -66,3 +66,37 @@ button, input, textarea, div {
 .slick-dots li.slick-active button:after {
     opacity: 100%;
 }
+
+/* Custom Adjustor */
+input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    border: 4px solid white;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    appearance: none;
+    outline: 1px solid rgba(104, 109, 118, 0.25);
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border: 4px solid white;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: 1px solid rgba(104, 109, 118, 0.25);
+}
+
+input[type="range"]::-ms-thumb {
+    width: 16px;
+    height: 16px;
+    border: 4px solid white;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: 1px solid rgba(104, 109, 118, 0.25);
+}
+
+/**/

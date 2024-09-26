@@ -2,8 +2,13 @@
 import ColorUnit from "@/components/globals/ColorUnit";
 import Quotes from "@/components/globals/Quotes";
 import ContrastResult from "@/components/globals/ContrastResult";
+import { useState } from "react";
 
 function Home() {
+   const [foreground, setForeground] = useState("#dddfe2");
+   const [background, setBackground] = useState("#2a22b5");
+   console.log("Home");
+
    return (
       <div>
          <section className="mt-24 mb-20">
@@ -22,11 +27,19 @@ function Home() {
          <section className="">
             <div className="container">
                <div className="flex gap-9 justify-center">
-                  <ColorUnit label="Foreground" />
-                  <ColorUnit label="Foreground" />
+                  <ColorUnit
+                     color={foreground}
+                     setColor={setForeground}
+                     label="Foreground"
+                  />
+                  {/* <ColorUnit
+                     color={background}
+                     setColor={setBackground}
+                     label="Background"
+                  /> */}
                   <div className="flex gap-3 flex-col w-[474px]">
                      <div>
-                        <Quotes />
+                        <Quotes background={background} foreground={foreground} />
                      </div>
                      <div className="">
                         <ContrastResult />

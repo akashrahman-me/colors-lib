@@ -62,7 +62,12 @@ const allQuotes: Quote[] = [
    },
 ];
 
-function QuotesSlider() {
+interface QuotesProps {
+   background: string;
+   foreground: string;
+}
+
+function Quotes({ background, foreground }: QuotesProps) {
    const sliderSettings: Settings = {
       dots: true,
       infinite: true,
@@ -81,10 +86,13 @@ function QuotesSlider() {
    }, []);
 
    return (
-      <div>
-         <Slider className="quotes-slider bg-primary-700" {...sliderSettings}>
+      <div
+         className="bg-primary-700"
+         style={{ background: background, color: foreground }}
+      >
+         <Slider className="quotes-slider" {...sliderSettings}>
             {quotes.map(({ quote, writer, label }) => (
-               <blockquote key={label} className="py-8 px-6 text-white text-center">
+               <blockquote key={label} className="py-8 px-6 text-center">
                   <h4 className="font-medium font-lexend-exa text-[28px] mb-5">
                      {label}
                   </h4>
@@ -99,4 +107,4 @@ function QuotesSlider() {
    );
 }
 
-export default QuotesSlider;
+export default Quotes;
