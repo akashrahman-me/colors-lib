@@ -1,7 +1,7 @@
 "use client";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { useState } from "react";
-import HSBColorPicker from "@/components/common/HSBColorPicker";
+import { useEffect, useState } from "react";
+import HSBColorPicker from "@/components/globals/HSBColorPicker";
 
 const colorOptions = ["Picker", "RGB", "HSL", "HSB"];
 
@@ -12,12 +12,18 @@ interface ColorUnitProps {
 }
 
 function ColorUnit({ label, setColor, color }: ColorUnitProps) {
+   // console.log("Color Unit");
+
    const [value, setValue] = useState(color);
-   const [colorValue, setColorValue] = useState(color);
+   const [submition, setSubmition] = useState<boolean>(false);
+
+   useEffect(() => {
+      setValue(color);
+   }, [color]);
 
    const submitColor = (color: string) => {
       setColor(color);
-      setColorValue(color);
+      setSubmition((v) => !v);
    };
 
    return (
@@ -45,13 +51,11 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
             </TabList>
             <div className="p-5 shadow-[1px_1px_2px_0px_rgba(0,_0,_0,_0.10)]">
                <TabPanel className="">
-                  <div className=" flex gap-2.5 flex-col">
-                     <HSBColorPicker
-                        colorValue={colorValue}
-                        color={color}
-                        setColor={setColor}
-                     />
-                  </div>
+                  <HSBColorPicker
+                     submition={submition}
+                     color={color}
+                     setColor={setColor}
+                  />
                </TabPanel>
                <TabPanel className="">
                   <div className="flex gap-2.5 flex-col">

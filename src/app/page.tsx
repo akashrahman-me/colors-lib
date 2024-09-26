@@ -2,11 +2,20 @@
 import ColorUnit from "@/components/globals/ColorUnit";
 import Quotes from "@/components/globals/Quotes";
 import ContrastResult from "@/components/globals/ContrastResult";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { contrastRatio } from "@/utilities/colorize";
 
 function Home() {
-   const [foreground, setForeground] = useState("#dddfe2");
+   const [foreground, setForeground] = useState("#95dce8");
    const [background, setBackground] = useState("#2a22b5");
+   const contrastResult = contrastRatio(background, foreground);
+   const [contrast, setContrast] = useState(contrastResult);
+
+   // useEffect(() => {
+   //    setContrast(contrastResult);
+   //    // eslint-disable-next-line react-hooks/exhaustive-deps
+   // }, [contrastResult]);
+
    console.log("Home");
 
    return (
@@ -24,7 +33,7 @@ function Home() {
                </div>
             </div>
          </section>
-         <section className="">
+         <section className="mb-20">
             <div className="container">
                <div className="flex gap-9 justify-center">
                   <ColorUnit
@@ -42,7 +51,7 @@ function Home() {
                         <Quotes background={background} foreground={foreground} />
                      </div>
                      <div className="">
-                        <ContrastResult />
+                        <ContrastResult setContrast={setContrast} contrast={contrast} />
                      </div>
                   </div>
                </div>

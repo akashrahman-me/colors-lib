@@ -7,9 +7,15 @@ const formatNumber = new Intl.NumberFormat("en-US", {
    maximumFractionDigits: 2,
 }).format;
 
-function ContrastResult() {
-   const [contrast, setContrast] = useState<number>(1);
-   const [contrastInput, setContrastInput] = useState<string>("");
+interface ContrastResultProps {
+   contrast: number;
+   setContrast: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function ContrastResult({ contrast, setContrast }: ContrastResultProps) {
+   // console.log("ContrastResult");
+
+   const [contrastInput, setContrastInput] = useState<string>(formatNumber(contrast));
 
    useEffect(() => {
       setContrastInput(formatNumber(contrast));
@@ -17,7 +23,7 @@ function ContrastResult() {
 
    const handleIncrement = (
       event: React.KeyboardEvent<HTMLInputElement> | React.WheelEvent<HTMLInputElement>,
-      direction: number,
+      direction: number
    ) => {
       const adjust = event.ctrlKey ? 3 : event.shiftKey ? 0.25 : event.altKey ? 0.05 : 1;
       if (direction !== 0) {
@@ -75,7 +81,7 @@ function ContrastResult() {
                   {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                   {/* @ts-ignore */}
                   <Rating
-                     initialRating={4}
+                     initialRating={3}
                      readonly
                      fullSymbol={
                         // eslint-disable-next-line @next/next/no-img-element
@@ -90,7 +96,7 @@ function ContrastResult() {
             </div>
          </div>
          <div className="grid grid-cols-2 gap-8">
-            {[4, 3].map((rate, index) => (
+            {[2, 1].map((rate, index) => (
                <div key={index} className="py-2.5 flex items-center justify-between">
                   <span className="font-medium text-sm leading-normal">
                      {index == 0 && "Small Text"}
@@ -101,6 +107,7 @@ function ContrastResult() {
                      {/* @ts-ignore */}
                      <Rating
                         initialRating={rate}
+                        stop={3}
                         readonly
                         fullSymbol={
                            // eslint-disable-next-line @next/next/no-img-element
