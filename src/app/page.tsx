@@ -8,8 +8,8 @@ import { contrastRatio } from "@/utilities/colorize";
 function Home() {
    // console.log("Home");
 
-   const [foreground, setForeground] = useState("#95dce8");
-   const [background, setBackground] = useState("#2a22b5");
+   const [foreground, setForeground] = useState("#f5f0f7");
+   const [background, setBackground] = useState("#8817C0");
 
    return (
       <div>

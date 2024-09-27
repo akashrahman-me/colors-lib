@@ -87,7 +87,7 @@ function Quotes({ background, foreground }: QuotesProps) {
 
    return (
       <div
-         className="bg-primary-700"
+         className="bg-primary-700 min-h-[205px]"
          style={{ background: background, color: foreground }}
       >
          <Slider className="quotes-slider" {...sliderSettings}>
@@ -103,6 +103,13 @@ function Quotes({ background, foreground }: QuotesProps) {
                </blockquote>
             ))}
          </Slider>
+         <style jsx global>
+            {`
+               .slick-dots li button:after {
+                  background-color: ${foreground} !important;
+               }
+            `}
+         </style>
       </div>
    );
 }

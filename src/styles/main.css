@@ -112,10 +112,8 @@ input[type="range"]::-ms-thumb {
 }
 
 /* Color picker */
-
 .sketch-manner {
    width: 100% !important;
-   aspect-ratio: 1 / 1;
    padding: 0 !important;
    box-shadow: none !important;
    border: none !important;
@@ -139,11 +137,20 @@ input[type="range"]::-ms-thumb {
    appearance: none;
    outline: 1px solid rgba(104, 109, 118, 0.25);
 }
-
 .sketch-manner .flexbox-fix {
    display: none !important;
 }
 .sketch-manner .saturation-white > div:nth-child(2) > div {
    width: 8px !important;
    height: 8px !important;
+}
+
+/* .sketch-manner */
+.sketch-manner {
+   aspect-ratio: 3/1;
+}
+.sketch-manner > div:first-child {
+   padding-bottom: 0 !important;
+   height: 94px;
+   width: 100% !important;
 }
