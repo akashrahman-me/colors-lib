@@ -28,7 +28,7 @@ function Home() {
          </section>
          <section className="mb-20">
             <div className="container">
-               <div className="flex gap-9 justify-center">
+               <div className="flex gap-9 max-w-7xl mx-auto">
                   <ColorUnit
                      color={foreground}
                      setColor={setForeground}
