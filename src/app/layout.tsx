@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import "@/styles/main.css";
-import { Lexend, Lexend_Exa, Mochiy_Pop_P_One } from "next/font/google";
+import { Lexend, Lexend_Exa, Roboto_Slab } from "next/font/google";
 import Navbar from "@/components/globals/Navbar";
 
 const lexend = Lexend({
@@ -16,13 +16,13 @@ const lexendExa = Lexend_Exa({
    variable: "--font-lexend-exa",
 });
 
-const mochiyPopOne = Mochiy_Pop_P_One({
+const robotoSlab = Roboto_Slab({
    subsets: ["latin"],
-   weight: ["400"],
-   variable: "--font-mochiy-pop-one",
+   weight: ["700", "800", "900"],
+   variable: "--font-roboto-slab",
 });
 
-const fonts = [lexend, lexendExa, mochiyPopOne].map((font) => font.variable).join(" ");
+const fonts = [lexend, lexendExa, robotoSlab].map((font) => font.variable).join(" ");
 
 export const metadata: Metadata = {
    title: "Create Next App",

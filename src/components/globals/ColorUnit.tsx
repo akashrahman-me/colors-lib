@@ -8,11 +8,11 @@ const colorOptions = ["Picker", "RGB", "HSL", "HSB"];
 interface ColorUnitProps {
    label: string;
    color: string;
-   setColor: React.Dispatch<React.SetStateAction<string>>;
+   setColor: (color: string) => void;
 }
 
 function ColorUnit({ label, setColor, color }: ColorUnitProps) {
-   console.log("Color Unit");
+   // console.log("Color Unit");
 
    const [value, setValue] = useState(color);
 

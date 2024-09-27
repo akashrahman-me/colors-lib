@@ -1,133 +1,125 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client";
 import Rating from "react-rating";
-import React, { useEffect, useState } from "react";
-
-const formatNumber = new Intl.NumberFormat("en-US", {
-   minimumFractionDigits: 0,
-   maximumFractionDigits: 2,
-}).format;
+import React from "react";
 
 interface ContrastResultProps {
    value: number;
-   onChange: (value: number) => void;
 }
 
-function ContrastResult({ onChange, value }: ContrastResultProps) {
-   console.log("Contrast Result");
+const colors = ["#dc3545", "#fd7e14", "#9b59b6", "#5bc0de", "#28a745"];
 
-   const [contrastInput, setContrastInput] = useState<string>(formatNumber(value));
+// Helper function to get the rating based on the contrast ratio (3-star system for text ratings)
+const getTextRating = (contrast: number, isLargeText: boolean) => {
+   if (isLargeText) {
+      if (contrast >= 4.5) return { label: "Good", color: colors[4] };
+      if (contrast >= 3) return { label: "Average", color: colors[2] };
+      return { label: "Very Bad", color: colors[0] };
+   } else {
+      if (contrast >= 7) return { label: "Good", color: colors[4] };
+      if (contrast >= 4.5) return { label: "Average", color: colors[2] };
+      return { label: "Very Bad", color: colors[0] };
+   }
+};
 
-   useEffect(() => {
-      const formattedValue = formatNumber(value);
-      if (formattedValue !== contrastInput) {
-         setContrastInput(formattedValue);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, [value]);
+// Helper function to calculate star rating (3-star system for text ratings)
+const calculateTextStarRating = (contrast: number, isLargeText: boolean) => {
+   if (isLargeText) {
+      if (contrast >= 4.5) return 3; // 3 stars
+      if (contrast >= 3) return 2; // 2 stars
+      return 1; // 1 star
+   } else {
+      if (contrast >= 7) return 3; // 3 stars
+      if (contrast >= 4.5) return 2; // 2 stars
+      return 1; // 1 star
+   }
+};
 
-   const handleOnChange = (value: number) => {
-      onChange(value);
-      // setContrastInput(formatNumber(value));
-   };
+// Function to calculate star rating based on the contrast value (5 stars system for overall rating)
+const calculateStarRating = (contrast: number) => {
+   if (contrast >= 10) return 5; // 5 stars
+   if (contrast >= 7) return 4; // 4 stars
+   if (contrast >= 4.5) return 3; // 3 stars
+   if (contrast >= 3) return 2; // 2 stars
+   return 1; // 1 star
+};
 
-   const handleIncrement = (
-      event: React.KeyboardEvent<HTMLInputElement> | React.WheelEvent<HTMLInputElement>,
-      direction: number
-   ) => {
-      const adjust = event.ctrlKey ? 3 : event.shiftKey ? 0.25 : event.altKey ? 0.05 : 1;
-      if (direction !== 0) {
-         // onChange((v) => Math.max(1, Math.min(21, v + direction * adjust)));
-         handleOnChange(
-            Math.max(1, Math.min(21, parseFloat(contrastInput) + direction * adjust))
-         );
-      }
-   };
+function ContrastResult({ value }: ContrastResultProps) {
+   const smallTextRating = getTextRating(value, false);
+   const largeTextRating = getTextRating(value, true);
 
-   const handleKey = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      // event.preventDefault();
-      const direction = event.key === "ArrowUp" ? 1 : event.key === "ArrowDown" ? -1 : 0;
-      handleIncrement(event, direction);
-
-      if (event.key === "Enter") {
-         let value = event.currentTarget.value as unknown as number;
-         value = parseFloat(formatNumber(Math.max(1, Math.min(21, Number(value)))));
-         handleOnChange(value);
-      }
-   };
-
-   const handleWheel = (event: React.WheelEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      const direction = Math.max(-1, Math.min(1, event.deltaY));
-      handleIncrement(event, direction * -1);
-   };
-
-   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.currentTarget;
-      setContrastInput(value);
-   };
-
-   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-      let value = event.currentTarget.value as unknown as number;
-      value = parseFloat(formatNumber(Math.max(1, Math.min(21, Number(value)))));
-      handleOnChange(value);
-   };
+   const overallRating =
+      value >= 10
+         ? "Excellent"
+         : value >= 7
+         ? "Good"
+         : value >= 4.5
+         ? "Average"
+         : value >= 3
+         ? "Poor"
+         : "Very Bad";
+   const overallColor =
+      value >= 10
+         ? colors[4] // Green
+         : value >= 7
+         ? colors[3] // Light Blue
+         : value >= 4.5
+         ? colors[2] // Yellow
+         : value >= 3
+         ? colors[1] // Orange
+         : colors[0]; // Red
 
    return (
       <div className="bg-white pt-5 px-6 pb-7 flex gap-7 flex-col">
          <h4 className="text-xl leading-normal">Contrast Result & Rating</h4>
          <div className="flex gap-24 items-center">
-            <div className="">
-               <input
-                  onKeyDown={handleKey}
-                  value={contrastInput}
-                  onChange={handleChange}
-                  onWheel={handleWheel}
-                  onBlur={handleBlur}
-                  className="font-mochiy-pop-one text-[40px] leading-none w-max border-b border-transparent hover:border-[rgba(104,109,118)]/75 focus:border-[rgba(104,109,118)]/75 focus:bg-[rgba(104,109,118)]/15 hover:bg-[rgba(104,109,118)]/15 pt-2 pb-1 px-1 cursor-text duration-200 select-none selection:bg-transparent min-w-[100px]"
-                  style={{ width: `${contrastInput.length}ch` }}
-               />
+            <div>
+               <span
+                  className="font-mochiy-pop-one font-black text-[48px] leading-none w-max pt-2 pb-1 px-1"
+                  style={{ color: overallColor }}
+               >
+                  {value}
+               </span>
             </div>
             <div className="flex gap-2 items-end justify-center flex-col text-end flex-grow">
-               <span className="text-lg leading-normal">Good</span>
-               <div className="">
-                  {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+               <span className="text-lg leading-normal" style={{ color: overallColor }}>
+                  {overallRating}
+               </span>
+               <div>
                   {/* @ts-ignore */}
                   <Rating
-                     initialRating={3}
+                     initialRating={calculateStarRating(value)}
                      readonly
-                     fullSymbol={
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src="/images/Star 1.svg" alt="" />
-                     }
-                     emptySymbol={
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src="/images/Star 5.svg" alt="" />
-                     }
+                     fullSymbol={<img src="/images/Star 1.svg" alt="Full Star" />}
+                     emptySymbol={<img src="/images/Star 5.svg" alt="Empty Star" />}
                   />
                </div>
             </div>
          </div>
          <div className="grid grid-cols-2 gap-8">
-            {[2, 1].map((rate, index) => (
+            {[smallTextRating, largeTextRating].map((rating, index) => (
                <div key={index} className="py-2.5 flex items-center justify-between">
                   <span className="font-medium text-sm leading-normal">
-                     {index == 0 && "Small Text"}
-                     {index == 1 && "Large Text"}
+                     {index === 0 ? "Small Text" : "Large Text"}
                   </span>
-                  <div className="">
-                     {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                  <div className="flex items-center gap-2">
+                     <span
+                        className="text-sm font-medium"
+                        style={{ color: rating.color }}
+                     >
+                        {rating.label}
+                     </span>
+
                      {/* @ts-ignore */}
                      <Rating
-                        initialRating={rate}
+                        className="-mb-[5px]"
+                        initialRating={calculateTextStarRating(value, index === 1)}
                         stop={3}
                         readonly
-                        fullSymbol={
-                           // eslint-disable-next-line @next/next/no-img-element
-                           <img src="/images/Star 1 (1).svg" alt="" />
-                        }
+                        fullSymbol={<img src="/images/Star 1 (1).svg" alt="Full Star" />}
                         emptySymbol={
-                           // eslint-disable-next-line @next/next/no-img-element
-                           <img src="/images/Star 5 (1).svg" alt="" />
+                           <img src="/images/Star 5 (1).svg" alt="Empty Star" />
                         }
                      />
                   </div>

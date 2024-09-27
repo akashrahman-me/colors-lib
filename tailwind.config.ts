@@ -21,7 +21,7 @@ const config: Config = {
       fontFamily: {
          lexend: ["var(--font-lexend)", ...fontFamily.sans],
          "lexend-exa": ["var(--font-lexend-exa)", ...fontFamily.sans],
-         "mochiy-pop-one": ["var(--font-mochiy-pop-one)", ...fontFamily.sans],
+         "mochiy-pop-one": ["var(--font-roboto-slab)", ...fontFamily.sans],
       },
       container: {
          center: true,

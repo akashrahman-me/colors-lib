@@ -4,7 +4,7 @@ import ColorSlider from "../common/ColorSlider";
 
 interface HSBColorPickerProps {
    color: string;
-   setColor: React.Dispatch<React.SetStateAction<string>>;
+   setColor: (color: string) => void;
 }
 
 function HSBColorPicker({ color, setColor }: HSBColorPickerProps) {
