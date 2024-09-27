@@ -38,7 +38,7 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
                value={value}
                onChange={(e) => setValue(e.currentTarget.value)}
                onBlur={(e) => submitColor(e.currentTarget.value)}
-               className="bg-primary-700/10 py-2.5 px-4 border-b border-primary-700 text-base leading-normal text-uppercase min-w-0 w-full max-w-[150px] text-center"
+               className="bg-primary-700/10 uppercase py-2.5 px-4 border-b border-primary-700 text-base leading-normal min-w-0 w-full max-w-[150px] text-center"
             />
             <div className="py-2.5 px-5 flex-1" style={{ backgroundColor: color }} />
          </div>
