@@ -2,6 +2,9 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { useEffect, useState } from "react";
 import HSBColorPicker from "@/components/globals/HSBColorPicker";
+import RGBColorPicker from "./RGBColorPicker";
+import HSLColorPicker from "./HSLColorPicker";
+import ColorPicker from "./ColorPicker";
 
 const colorOptions = ["Picker", "RGB", "HSL", "HSB"];
 
@@ -43,7 +46,7 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
             <TabList className="flex gap-2.5 border-b border-primary-700">
                {colorOptions.map((color, index) => (
                   <Tab
-                     className="cursor-pointer py-1.5 px-5 flex items-center justify-center text-sm leading-normal"
+                     className="cursor-pointer py-1.5 px-5 flex items-center justify-center text-sm leading-normal focus:outline-0"
                      key={index}
                   >
                      {color}
@@ -52,15 +55,19 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
             </TabList>
             <div className="p-5 shadow-[1px_1px_2px_0px_rgba(0,_0,_0,_0.10)]">
                <TabPanel className="">
+                  <ColorPicker color={color} setColor={setColor} />
+               </TabPanel>
+               <TabPanel className="">
+                  <RGBColorPicker color={color} setColor={setColor} />
+               </TabPanel>
+               <TabPanel className="">
+                  <HSLColorPicker color={color} setColor={setColor} />
+               </TabPanel>
+               <TabPanel className="">
                   <HSBColorPicker
                      color={color}
                      setColor={(value) => (setValue(value), setColor(value))}
                   />
-               </TabPanel>
-               <TabPanel className="">
-                  <div className="flex gap-2.5 flex-col">
-                     <h2>Any content 2</h2>
-                  </div>
                </TabPanel>
             </div>
          </Tabs>
