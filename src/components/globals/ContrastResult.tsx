@@ -8,18 +8,27 @@ const formatNumber = new Intl.NumberFormat("en-US", {
 }).format;
 
 interface ContrastResultProps {
-   contrast: number;
-   setContrast: React.Dispatch<React.SetStateAction<number>>;
+   value: number;
+   onChange: (value: number) => void;
 }
 
-function ContrastResult({ contrast, setContrast }: ContrastResultProps) {
-   // console.log("ContrastResult");
+function ContrastResult({ onChange, value }: ContrastResultProps) {
+   console.log("Contrast Result");
 
-   const [contrastInput, setContrastInput] = useState<string>(formatNumber(contrast));
+   const [contrastInput, setContrastInput] = useState<string>(formatNumber(value));
 
    useEffect(() => {
-      setContrastInput(formatNumber(contrast));
-   }, [contrast]);
+      const formattedValue = formatNumber(value);
+      if (formattedValue !== contrastInput) {
+         setContrastInput(formattedValue);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [value]);
+
+   const handleOnChange = (value: number) => {
+      onChange(value);
+      // setContrastInput(formatNumber(value));
+   };
 
    const handleIncrement = (
       event: React.KeyboardEvent<HTMLInputElement> | React.WheelEvent<HTMLInputElement>,
@@ -27,7 +36,10 @@ function ContrastResult({ contrast, setContrast }: ContrastResultProps) {
    ) => {
       const adjust = event.ctrlKey ? 3 : event.shiftKey ? 0.25 : event.altKey ? 0.05 : 1;
       if (direction !== 0) {
-         setContrast((v) => Math.max(1, Math.min(21, v + direction * adjust)));
+         // onChange((v) => Math.max(1, Math.min(21, v + direction * adjust)));
+         handleOnChange(
+            Math.max(1, Math.min(21, parseFloat(contrastInput) + direction * adjust))
+         );
       }
    };
 
@@ -39,7 +51,7 @@ function ContrastResult({ contrast, setContrast }: ContrastResultProps) {
       if (event.key === "Enter") {
          let value = event.currentTarget.value as unknown as number;
          value = parseFloat(formatNumber(Math.max(1, Math.min(21, Number(value)))));
-         setContrast(value);
+         handleOnChange(value);
       }
    };
 
@@ -57,7 +69,7 @@ function ContrastResult({ contrast, setContrast }: ContrastResultProps) {
    const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
       let value = event.currentTarget.value as unknown as number;
       value = parseFloat(formatNumber(Math.max(1, Math.min(21, Number(value)))));
-      setContrast(value);
+      handleOnChange(value);
    };
 
    return (

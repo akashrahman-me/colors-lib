@@ -3,20 +3,19 @@ import ColorUnit from "@/components/globals/ColorUnit";
 import Quotes from "@/components/globals/Quotes";
 import ContrastResult from "@/components/globals/ContrastResult";
 import { useEffect, useState } from "react";
-import { contrastRatio } from "@/utilities/colorize";
+import { contrastRatio, contrastToTex } from "@/utilities/colorize";
 
 function Home() {
+   console.log("Home");
+
    const [foreground, setForeground] = useState("#95dce8");
    const [background, setBackground] = useState("#2a22b5");
-   const contrastResult = contrastRatio(background, foreground);
-   const [contrast, setContrast] = useState(contrastResult);
+   const [contrast, setContrast] = useState(contrastRatio(background, foreground));
 
-   // useEffect(() => {
-   //    setContrast(contrastResult);
-   //    // eslint-disable-next-line react-hooks/exhaustive-deps
-   // }, [contrastResult]);
-
-   console.log("Home");
+   useEffect(() => {
+      setContrast(contrastRatio(background, foreground));
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [foreground, background]);
 
    return (
       <div>
@@ -41,17 +40,28 @@ function Home() {
                      setColor={setForeground}
                      label="Foreground"
                   />
-                  {/* <ColorUnit
+                  <ColorUnit
                      color={background}
                      setColor={setBackground}
                      label="Background"
-                  /> */}
+                  />
                   <div className="flex gap-3 flex-col w-[474px]">
                      <div>
                         <Quotes background={background} foreground={foreground} />
                      </div>
                      <div className="">
-                        <ContrastResult setContrast={setContrast} contrast={contrast} />
+                        <ContrastResult
+                           value={contrast}
+                           onChange={(contrast) => {
+                              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                              const [color, cont] = contrastToTex(
+                                 background,
+                                 foreground,
+                                 contrast
+                              );
+                              setForeground(color);
+                           }}
+                        />
                      </div>
                   </div>
                </div>

@@ -8,22 +8,23 @@ const colorOptions = ["Picker", "RGB", "HSL", "HSB"];
 interface ColorUnitProps {
    label: string;
    color: string;
-   setColor: (color: string) => void;
+   setColor: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function ColorUnit({ label, setColor, color }: ColorUnitProps) {
-   // console.log("Color Unit");
+   console.log("Color Unit");
 
    const [value, setValue] = useState(color);
-   const [submition, setSubmition] = useState<boolean>(false);
 
    useEffect(() => {
-      setValue(color);
+      if (value !== color) {
+         setValue(color);
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [color]);
 
    const submitColor = (color: string) => {
       setColor(color);
-      setSubmition((v) => !v);
    };
 
    return (
@@ -52,9 +53,8 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
             <div className="p-5 shadow-[1px_1px_2px_0px_rgba(0,_0,_0,_0.10)]">
                <TabPanel className="">
                   <HSBColorPicker
-                     submition={submition}
                      color={color}
-                     setColor={setColor}
+                     setColor={(value) => (setValue(value), setColor(value))}
                   />
                </TabPanel>
                <TabPanel className="">
