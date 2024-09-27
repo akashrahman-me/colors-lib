@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import "@/styles/main.css";
-import { Lexend, Lexend_Exa, Mochiy_Pop_One, Mochiy_Pop_P_One } from "next/font/google";
+import { Lexend, Lexend_Exa, Mochiy_Pop_P_One } from "next/font/google";
 import Navbar from "@/components/globals/Navbar";
 
 const lexend = Lexend({
