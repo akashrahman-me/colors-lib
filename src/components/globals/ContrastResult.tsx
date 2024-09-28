@@ -97,9 +97,12 @@ function ContrastResult({ value }: ContrastResultProps) {
                </div>
             </div>
          </div>
-         <div className="grid grid-cols-2 gap-8">
+         <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-8">
             {[smallTextRating, largeTextRating].map((rating, index) => (
-               <div key={index} className="py-2.5 flex items-center justify-between">
+               <div
+                  key={index}
+                  className="py-2.5 flex items-center justify-between border-b border-[#686D76]/10"
+               >
                   <span className="font-medium text-sm leading-normal">
                      {index === 0 ? "Small Text" : "Large Text"}
                   </span>

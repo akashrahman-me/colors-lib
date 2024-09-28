@@ -6,6 +6,7 @@ import HSBColorPicker from "@/components/globals/HSBColorPicker";
 import RGBColorPicker from "./RGBColorPicker";
 import HSLColorPicker from "./HSLColorPicker";
 import ColorPicker from "./ColorPicker";
+import Color from "color";
 import { motion } from "framer-motion";
 
 const colorOptions = ["Picker", "RGB", "HSL", "HSB"];
@@ -37,8 +38,14 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [color]);
 
-   const submitColor = (color: string) => {
-      setColor(color);
+   const submitColor = (newColor: string) => {
+      try {
+         const validColor = Color(newColor);
+         setColor(validColor.hex().toUpperCase());
+         // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (e) {
+         setValue(color);
+      }
    };
 
    const tabsButtonRef = useRef<Array<HTMLElement | null>>([]);
@@ -82,7 +89,7 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
    };
 
    return (
-      <div className="bg-white pt-6 px-6 pb-12 flex gap-6 flex-col">
+      <div className="bg-white w-full xl:w-auto pt-6 px-6 pb-12 flex gap-6 flex-col">
          <h4 className="text-xl leading-normal">{label}</h4>
          <div className="flex gap-6">
             <div className="relative z-0">
@@ -100,12 +107,12 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
                      }
                      transition={{ duration: 0.5 }}
                   >
-                     {color.replace("#", "")}
+                     {value}
                   </motion.span>
                </div>
                <input
                   tabIndex={348}
-                  value={color.replace("#", "")}
+                  value={value}
                   onChange={(e) => setValue(e.currentTarget.value)}
                   onBlur={(e) => submitColor(e.currentTarget.value)}
                   className="bg-primary-700/10 uppercase py-2.5 px-4 border-b border-primary-700 text-base leading-normal min-w-0 w-full max-w-[150px] text-center relative z-10"
@@ -146,7 +153,7 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
                   </div>
                ))}
             </div>
-            <div className="p-5 shadow-[1px_1px_2px_0px_rgba(0,_0,_0,_0.10)]">
+            <div className="sm:p-5 sm:shadow-[1px_1px_2px_0px_rgba(0,_0,_0,_0.10)]">
                <TabPanel>
                   <ColorPicker color={color} setColor={setColor} />
                </TabPanel>

@@ -150,9 +150,6 @@ input[type="range"]::-ms-thumb {
 }
 
 /* .sketch-manner */
-.sketch-manner {
-   aspect-ratio: 3/1;
-}
 .sketch-manner > div:first-child {
    padding-bottom: 0 !important;
    height: 94px;

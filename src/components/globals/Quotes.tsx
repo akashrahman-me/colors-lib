@@ -87,7 +87,7 @@ function Quotes({ background, foreground }: QuotesProps) {
 
    return (
       <div
-         className="bg-primary-700 min-h-[205px]"
+         className="bg-primary-700 min-h-[205px] h-full"
          style={{ background: background, color: foreground }}
       >
          <Slider className="quotes-slider" {...sliderSettings}>
