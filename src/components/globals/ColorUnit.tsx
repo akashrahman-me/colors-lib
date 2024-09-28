@@ -85,36 +85,34 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
       <div className="bg-white pt-6 px-6 pb-12 flex gap-6 flex-col">
          <h4 className="text-xl leading-normal">{label}</h4>
          <div className="flex gap-6">
-            <div className="relative">
-               <div className="text-base leading-normal uppercase absolute top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2">
+            <div className="relative z-0">
+               <div className="text-base leading-normal uppercase absolute top-1/2 -translate-y-1/2 -translate-x-1/2 left-1/2 -z-10">
                   <motion.span
                      className="block"
                      initial={{ opacity: 0 }}
-                     animate={copied ? { opacity: [1, 0], y: [0, -56] } : {}}
+                     animate={
+                        copied
+                           ? {
+                                opacity: [1, 0],
+                                y: [0, -56],
+                             }
+                           : {}
+                     }
                      transition={{ duration: 0.5 }}
                   >
-                     {value}
+                     {color.replace("#", "")}
                   </motion.span>
                </div>
-               <motion.input
-                  transition={{ duration: 0.5 }}
-                  animate={
-                     copied
-                        ? {
-                             x: [
-                                10, 0, -10, 8, 0, -8, 6, 0, -6, 4, 0, -4, 2, 0, -2, 1, 0,
-                                -1,
-                             ],
-                          }
-                        : {}
-                  }
-                  value={value}
+               <input
+                  tabIndex={348}
+                  value={color.replace("#", "")}
                   onChange={(e) => setValue(e.currentTarget.value)}
                   onBlur={(e) => submitColor(e.currentTarget.value)}
-                  className="bg-primary-700/10 uppercase py-2.5 px-4 border-b border-primary-700 text-base leading-normal min-w-0 w-full max-w-[150px] text-center"
+                  className="bg-primary-700/10 uppercase py-2.5 px-4 border-b border-primary-700 text-base leading-normal min-w-0 w-full max-w-[150px] text-center relative z-10"
                />
             </div>
             <div
+               aria-label="Copy to clipboard"
                onClick={copyToClipboard}
                className="py-2.5 px-5 flex-1"
                role="button"
@@ -171,3 +169,14 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
 }
 
 export default ColorUnit;
+
+// animate={
+//    copied
+//       ? {
+//            x: [
+//               10, 0, -10, 8, 0, -8, 6, 0, -6, 4, 0, -4, 2, 0, -2, 1, 0,
+//               -1, 0,
+//            ],
+//         }
+//       : {}
+// }

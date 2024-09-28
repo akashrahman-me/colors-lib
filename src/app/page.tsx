@@ -26,7 +26,7 @@ function Home() {
                </div>
             </div>
          </section>
-         <section className="mb-20">
+         <section className="mb-20 overflow-hidden">
             <div className="container">
                <div className="flex gap-9 max-w-7xl mx-auto">
                   <ColorUnit

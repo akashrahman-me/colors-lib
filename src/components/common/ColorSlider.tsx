@@ -31,6 +31,7 @@ function ColorSlider({ value, onChange, background, max, min, label }: ColorSlid
          <label className="flex items-center justify-between gap-4">
             <b className="text-sm leading-normal font-normal">{label}</b>
             <input
+               tabIndex={457}
                type="number"
                className="py-0.5 w-9 text-xs leading-normal text-primary-700 bg-primary-700/10 border-b border-primary-700 text-center appearance-none"
                value={inputValue}
@@ -41,6 +42,7 @@ function ColorSlider({ value, onChange, background, max, min, label }: ColorSlid
          </label>
          <input
             type="range"
+            tabIndex={562}
             min={min}
             max={max}
             value={value}
