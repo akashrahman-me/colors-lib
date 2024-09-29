@@ -19,7 +19,7 @@ interface ColorUnitProps {
 
 function ColorUnit({ label, setColor, color }: ColorUnitProps) {
    const [value, setValue] = useState(color);
-   const [tabIndex, setTabIndex] = useState(2); // Default tab index to 0
+   const [tabIndex, setTabIndex] = useState(2);
 
    useEffect(() => {
       // Load saved tab index from localStorage, if it exists
@@ -60,7 +60,7 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
          const width = button?.clientWidth || 0;
          tabsButtonWidth.current[tabIndex] = width;
       });
-   }, [tabsButtonRef]);
+   }, []);
 
    useEffect(() => {
       localStorage.setItem(`${label}-selected-tab`, String(tabIndex));
@@ -138,7 +138,7 @@ function ColorUnit({ label, setColor, color }: ColorUnitProps) {
                      width: paper.width,
                   }}
                   transition={{ duration: 0.2 }}
-                  className=" bg-primary-700/10 min-w-20 absolute top-0 left-0 bottom-0 -z-10"
+                  className=" bg-primary-700/5 absolute top-0 left-0 bottom-0 -z-10 w-full"
                />
                {colorOptions.map((color, index) => (
                   <div
