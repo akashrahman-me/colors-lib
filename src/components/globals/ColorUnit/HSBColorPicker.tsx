@@ -1,6 +1,6 @@
 import React from "react";
 import { hexToRgb, hsbToRgb, rgbToHex, rgbToHsb } from "@/utilities/colorize";
-import ColorSlider from "../common/ColorSlider";
+import ColorSlider from "../../common/ColorSlider";
 
 interface HSBColorPickerProps {
    color: string;
@@ -30,7 +30,7 @@ function HSBColorPicker({ color, setColor }: HSBColorPickerProps) {
             max={360}
             value={hue}
             onChange={(value) => handleValues("hue", value)}
-            background="linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0), rgb(0, 255, 255), rgb(0, 0, 255), rgb(255, 0, 255), rgb(255, 0, 0))"
+            background={`linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0), rgb(0, 255, 255), rgb(0, 0, 255), rgb(255, 0, 255), rgb(255, 0, 0))`}
          />
          <ColorSlider
             label="Saturation"
@@ -39,7 +39,7 @@ function HSBColorPicker({ color, setColor }: HSBColorPickerProps) {
             value={saturation}
             onChange={(value) => handleValues("saturation", value)}
             background={`linear-gradient(to right, rgb(255, 255, 255), ${rgbToHex(
-               hsbToRgb(hue, 100, brightness)
+               hsbToRgb(hue, 100, brightness),
             )})`}
          />
          <ColorSlider
@@ -49,7 +49,7 @@ function HSBColorPicker({ color, setColor }: HSBColorPickerProps) {
             value={brightness}
             onChange={(value) => handleValues("brightness", value)}
             background={`linear-gradient(to right, rgb(0, 0, 0), ${rgbToHex(
-               hsbToRgb(hue, saturation, 100)
+               hsbToRgb(hue, saturation, 100),
             )})`}
          />
       </div>

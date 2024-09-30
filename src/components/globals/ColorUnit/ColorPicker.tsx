@@ -1,6 +1,6 @@
 import React from "react";
 import { hexToRgb, rgbToHsl, hslToRgb, rgbToHex } from "@/utilities/colorize";
-import ColorSlider from "../common/ColorSlider";
+import ColorSlider from "../../common/ColorSlider";
 import { SketchPicker } from "react-color";
 
 interface ColorPickerProps {
@@ -36,7 +36,7 @@ function ColorPicker({ color, setColor }: ColorPickerProps) {
             max={360}
             value={hue}
             onChange={(value) => handleValues("hue", value)}
-            background="linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0), rgb(0, 255, 255), rgb(0, 0, 255), rgb(255, 0, 255), rgb(255, 0, 0))"
+            background={`linear-gradient(to right, rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0), rgb(0, 255, 255), rgb(0, 0, 255), rgb(255, 0, 255), rgb(255, 0, 0))`}
          />
       </div>
    );

@@ -53,22 +53,22 @@ function ContrastResult({ value }: ContrastResultProps) {
       value >= 10
          ? "Excellent"
          : value >= 7
-         ? "Good"
-         : value >= 4.5
-         ? "Average"
-         : value >= 3
-         ? "Poor"
-         : "Very Bad";
+           ? "Good"
+           : value >= 4.5
+             ? "Average"
+             : value >= 3
+               ? "Poor"
+               : "Very Bad";
    const overallColor =
       value >= 10
          ? colors[4] // Green
          : value >= 7
-         ? colors[3] // Light Blue
-         : value >= 4.5
-         ? colors[2] // Yellow
-         : value >= 3
-         ? colors[1] // Orange
-         : colors[0]; // Red
+           ? colors[3] // Light Blue
+           : value >= 4.5
+             ? colors[2] // Yellow
+             : value >= 3
+               ? colors[1] // Orange
+               : colors[0]; // Red
 
    return (
       <div className="bg-white pt-5 px-6 pb-7 flex gap-7 flex-col">
@@ -91,8 +91,8 @@ function ContrastResult({ value }: ContrastResultProps) {
                   <Rating
                      initialRating={calculateStarRating(value)}
                      readonly
-                     fullSymbol={<img src="/images/Star 1.svg" alt="Full Star" />}
-                     emptySymbol={<img src="/images/Star 5.svg" alt="Empty Star" />}
+                     fullSymbol={<img src="/images/Star%201.svg" alt="Full Star" />}
+                     emptySymbol={<img src="/images/Star%205.svg" alt="Empty Star" />}
                   />
                </div>
             </div>
@@ -120,9 +120,11 @@ function ContrastResult({ value }: ContrastResultProps) {
                         initialRating={calculateTextStarRating(value, index === 1)}
                         stop={3}
                         readonly
-                        fullSymbol={<img src="/images/Star 1 (1).svg" alt="Full Star" />}
+                        fullSymbol={
+                           <img src="/images/Star%201%20(1).svg" alt="Full Star" />
+                        }
                         emptySymbol={
-                           <img src="/images/Star 5 (1).svg" alt="Empty Star" />
+                           <img src="/images/Star%205%20(1).svg" alt="Empty Star" />
                         }
                      />
                   </div>

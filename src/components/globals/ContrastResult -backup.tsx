@@ -12,7 +12,7 @@
 //    onChange?: (value: number) => void;
 // }
 
-// function ContrastResult({ value, onChange }: ContrastResultProps) {
+// function Index({ value, onChange }: ContrastResultProps) {
 //    console.log("Contrast Result");
 
 //    // const [contrastInput, setContrastInput] = useState<string>(
@@ -137,4 +137,4 @@
 //    );
 // }
 
-// export default ContrastResult;
+// export default Index;

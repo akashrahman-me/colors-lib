@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { hexToRgb, rgbToHex } from "@/utilities/colorize";
-import ColorSlider from "../common/ColorSlider";
+import ColorSlider from "../../common/ColorSlider";
 
 interface RGBColorPickerProps {
    color: string;

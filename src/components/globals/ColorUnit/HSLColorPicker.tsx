@@ -1,6 +1,6 @@
 import React from "react";
 import { hexToRgb, rgbToHsl, hslToRgb, rgbToHex } from "@/utilities/colorize";
-import ColorSlider from "../common/ColorSlider";
+import ColorSlider from "../../common/ColorSlider";
 
 interface HSLColorPickerProps {
    color: string;
@@ -39,7 +39,7 @@ function HSLColorPicker({ color, setColor }: HSLColorPickerProps) {
             value={saturation}
             onChange={(value) => handleValues("saturation", value)}
             background={`linear-gradient(to right, rgb(${hslToRgb(hue, 0, lightness).join(
-               ","
+               ",",
             )}), rgb(${hslToRgb(hue, 100, lightness).join(",")}))`}
          />
          <ColorSlider
@@ -51,7 +51,7 @@ function HSLColorPicker({ color, setColor }: HSLColorPickerProps) {
             background={`linear-gradient(to right, rgb(0, 0, 0), rgb(${hslToRgb(
                hue,
                saturation,
-               50
+               50,
             ).join(",")}), rgb(255, 255, 255))`}
          />
       </div>
