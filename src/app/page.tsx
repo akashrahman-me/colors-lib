@@ -1,7 +1,7 @@
 "use client";
 import ColorUnit from "@/components/globals/ColorUnit";
 import Quotes from "@/components/globals/Quotes";
-import { useState } from "react";
+import React, { useState } from "react";
 import { contrastRatio } from "@/utilities/colorize";
 import Intro from "@/app/Home/Intro";
 import ContrastResult from "@/components/globals/ContrastResult";
