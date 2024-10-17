@@ -41,7 +41,7 @@ const TraditionalTab = ({ options, children, label }: Props) => {
    const tabsButtonWidth = useRef<Array<number>>([]);
    const [paper, setPaper] = useState({
       x: 168,
-      width: 76,
+      width: 0,
       index: value,
    });
 
@@ -102,7 +102,7 @@ const TraditionalTab = ({ options, children, label }: Props) => {
                   }}
                   key={index}
                   role="button"
-                  className="cursor-pointer py-1.5 px-6 flex items-center justify-center text-sm leading-normal focus:outline-0"
+                  className="cursor-pointer py-1.5 px-4 sm:px-6 flex items-center justify-center text-sm leading-normal focus:outline-0"
                >
                   {button}
                </div>

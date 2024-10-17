@@ -7,8 +7,6 @@ import Intro from "@/app/Home/Intro";
 import ContrastResult from "@/components/globals/ContrastResult";
 
 function Home() {
-   // console.log("Home");
-
    const [foreground, setForeground] = useState("#f5f0f7");
    const [background, setBackground] = useState("#8817C0");
 
