@@ -19,8 +19,6 @@ interface Action {
 }
 
 const TraditionalTab = ({ options, children, label }: Props) => {
-   // const [value, setValue] = useState(0);
-
    const reducer = (state: State, action: Action): State => ({
       value: action.value,
       previous: state.value,
@@ -57,25 +55,39 @@ const TraditionalTab = ({ options, children, label }: Props) => {
    }, []);
 
    useEffect(() => {
-      tabsButtonRef.current.forEach((button, value) => {
-         tabsButtonWidth.current[value] = button?.clientWidth || 0;
-      });
+      const calculation = () => {
+         tabsButtonRef.current.forEach((button, value) => {
+            tabsButtonWidth.current[value] = button?.clientWidth || 0;
+         });
+      };
+
+      calculation();
+      window.addEventListener("resize", calculation);
+
+      return () => window.removeEventListener("resize", calculation);
    }, []);
 
    useEffect(() => {
-      if (value !== paper.index) {
-         localStorage.setItem(`${label}-selected-tab`, String(value));
+      const calculation = () => {
+         if (value !== paper.index) {
+            localStorage.setItem(`${label}-selected-tab`, String(value));
 
-         let x: number = 0;
-         if (
-            tabsButtonWidth.current.length !== 0 &&
-            tabsButtonWidth.current.slice(0, value).length !== 0
-         ) {
-            x = tabsButtonWidth.current.slice(0, value).reduce((a, b) => a + b);
+            let x: number = 0;
+            if (
+               tabsButtonWidth.current.length !== 0 &&
+               tabsButtonWidth.current.slice(0, value).length !== 0
+            ) {
+               x = tabsButtonWidth.current.slice(0, value).reduce((a, b) => a + b);
+            }
+            const width = tabsButtonWidth.current[value] || 0;
+            setPaper({ x, width, index: value });
          }
-         const width = tabsButtonWidth.current[value] || 0;
-         setPaper({ x, width, index: value });
-      }
+      };
+
+      calculation();
+      window.addEventListener("resize", calculation);
+
+      return () => window.removeEventListener("resize", calculation);
 
       // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [value]);
