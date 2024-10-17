@@ -38,7 +38,7 @@ const TraditionalTab = ({ options, children, label }: Props) => {
    const tabsButtonRef = useRef<Array<HTMLElement | null>>([]);
    const tabsButtonWidth = useRef<Array<number>>([]);
    const [paper, setPaper] = useState({
-      x: 168,
+      x: 0,
       width: 0,
       index: value,
    });
@@ -69,19 +69,17 @@ const TraditionalTab = ({ options, children, label }: Props) => {
 
    useEffect(() => {
       const calculation = () => {
-         if (value !== paper.index) {
-            localStorage.setItem(`${label}-selected-tab`, String(value));
+         localStorage.setItem(`${label}-selected-tab`, String(value));
 
-            let x: number = 0;
-            if (
-               tabsButtonWidth.current.length !== 0 &&
-               tabsButtonWidth.current.slice(0, value).length !== 0
-            ) {
-               x = tabsButtonWidth.current.slice(0, value).reduce((a, b) => a + b);
-            }
-            const width = tabsButtonWidth.current[value] || 0;
-            setPaper({ x, width, index: value });
+         let x: number = 0;
+         if (
+            tabsButtonWidth.current.length !== 0 &&
+            tabsButtonWidth.current.slice(0, value).length !== 0
+         ) {
+            x = tabsButtonWidth.current.slice(0, value).reduce((a, b) => a + b);
          }
+         const width = tabsButtonWidth.current[value] || 0;
+         setPaper({ x, width, index: value });
       };
 
       calculation();
@@ -94,10 +92,7 @@ const TraditionalTab = ({ options, children, label }: Props) => {
 
    return (
       <div aria-label="Tab container" className="color-adjust-tab flex flex-col gap-6">
-         <div
-            aria-label="Tab Buttions"
-            className="flex border-b border-primary-700 relative z-0"
-         >
+         <div aria-label="Tab Buttions" className="flex border-b border-primary-700 relative z-0">
             <motion.span
                animate={{
                   x: paper.x,
