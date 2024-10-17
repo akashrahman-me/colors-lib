@@ -112,7 +112,10 @@ const TraditionalTab = ({ options, children, label }: Props) => {
             className="sm:p-5 sm:shadow-[1px_1px_2px_0px_rgba(0,_0,_0,_0.10)]"
             aria-label="Tab Panel Container"
          >
-            <SwipeableViews className="[&_>_div]:max-w-[280px]" index={value}>
+            <SwipeableViews
+               className="md:[&_>_div]:max-w-[279px] lg:[&_>_div]:max-w-[405px] xl:[&_>_div]:max-w-[280px]"
+               index={value}
+            >
                {Children.map(children, (child, index) => (
                   <div key={index} className="px-px">
                      {child}

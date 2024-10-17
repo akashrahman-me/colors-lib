@@ -36,7 +36,7 @@ function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
    return (
       <html lang="en">
          <body className={`${fonts} bg-[#F0F2F5]`}>
-            <Navbar />
+            {/*<Navbar />*/}
             {children}
          </body>
       </html>
